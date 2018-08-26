@@ -1,0 +1,19 @@
+<div *ngIf="loading">
+  <kendo-chart [seriesColors]="colors">
+    <kendo-chart-legend position="top"></kendo-chart-legend>
+    <kendo-chart-series>
+      <kendo-chart-series-item type="pie" [data]="data.feed.entry" field="im:price.attributes.amount" categoryField="im:name.label">
+      </kendo-chart-series-item>
+    </kendo-chart-series>
+  </kendo-chart>
+  <div>
+    Search : <input [(ngModel)]="searchText" placeholder="filter by title">
+    <div class="row">
+      <div *ngFor="let c of data.feed.entry | filter : searchText" class="col-4">
+         <p>{{c.title.label}}</p>
+         <p>{{c.category.attributes.label}}</p>
+         <p>{{c.price}}</p>
+      </div>
+    </div>
+  </div>
+</div>
